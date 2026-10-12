@@ -1186,6 +1186,128 @@
     return `${verbList}${table}`;
   }
 
+  // Unit 1A: sort names by vowel sound. The example is fixed and not scored.
+  function renderVowelSortExercise(block) {
+    const columns = Array.isArray(block.columns) ? block.columns : [];
+    const names = Array.isArray(block.names) ? block.names : [];
+    const chip = (name) => `<button class="vowel-name-chip" type="button" draggable="true" data-vowel-name="${escapeHtml(name)}" aria-label="${escapeHtml(name)}. Select and choose a sound column">${escapeHtml(name)}</button>`;
+    const bank = `<div class="vowel-sort-bank" data-vowel-bank aria-label="Names to sort"><div class="vowel-sort-bank-title">Names</div><div class="vowel-sort-bank-chips">${names.map(chip).join('')}</div></div>`;
+    const chart = columns.map((col, index) => {
+      const word = `${escapeHtml(col.cueStart || '')}<strong>${escapeHtml(col.cueVowel || '')}</strong>${escapeHtml(col.cueEnd || '')}`;
+      const example = col.example ? `<div class="vowel-sort-worked-example"><span class="vowel-example-tag">Example</span><strong>${escapeHtml(col.example)}</strong></div>` : '';
+      return `<section class="vowel-sort-column"><header class="vowel-sort-column-head"><span class="vowel-sort-symbol" aria-hidden="true">${escapeHtml(col.symbol || '')}</span><span class="vowel-sort-column-number">${index + 1}</span><span class="vowel-sort-cue">${word}</span><span class="vowel-sort-ipa">/${escapeHtml(col.ipa || '')}/</span></header><div class="vowel-sort-dropzone" data-vowel-column="${escapeHtml(col.key)}" tabindex="0" role="group" aria-label="Column ${index + 1}: ${escapeHtml(col.label || col.key)} vowel sound">${example}<div class="vowel-sort-drop-hint">Place names here</div></div></section>`;
+    }).join('');
+    return `<div class="vowel-sort" data-vowel-sort><p class="vowel-sort-guidance">Drag the names into the matching columns. On a phone, tap a name and then tap its column. Tap a name again to return it to the list.</p>${bank}<div class="vowel-sort-grid">${chart}</div><div class="vowel-sort-status" role="status" aria-live="polite"></div></div>`;
+  }
+
+  function readVowelSortAnswers(node) {
+    const actual = {};
+    node.querySelectorAll('[data-vowel-name]').forEach((chip) => {
+      actual[chip.dataset.vowelName] = chip.closest('[data-vowel-column]')?.dataset.vowelColumn || '';
+    });
+    return actual;
+  }
+
+  function checkVowelSortBlock(block, node, options = {}) {
+    const actual = readVowelSortAnswers(node);
+    const answers = block.answers && typeof block.answers === 'object' ? block.answers : {};
+    let correctCount = 0;
+    const names = Array.isArray(block.names) ? block.names : [];
+    names.forEach((name) => {
+      const correct = actual[name] === answers[name];
+      if (correct) correctCount += 1;
+      if (!options.silent) {
+        const chip = [...node.querySelectorAll('[data-vowel-name]')].find((x) => x.dataset.vowelName === name);
+        if (chip) {
+          chip.classList.toggle('is-correct', correct);
+          chip.classList.toggle('is-wrong', !correct);
+        }
+      }
+    });
+    return { actual, correctCount, total: names.length };
+  }
+
+  function restoreVowelSortAnswers(block, node, saved) {
+    const bank = node.querySelector('[data-vowel-bank] .vowel-sort-bank-chips');
+    if (!bank || !saved || typeof saved !== 'object') return;
+    (Array.isArray(block.names) ? block.names : []).forEach((name) => {
+      const chip = [...node.querySelectorAll('[data-vowel-name]')].find((x) => x.dataset.vowelName === name);
+      const key = safeText(saved[name]);
+      const column = [...node.querySelectorAll('[data-vowel-column]')].find((x) => x.dataset.vowelColumn === key);
+      (column || bank).appendChild(chip);
+    });
+    node.querySelectorAll('.vowel-sort-dropzone').forEach((zone) => zone.classList.toggle('has-names', !!zone.querySelector('[data-vowel-name]')));
+  }
+
+  function wireVowelSortExercise(root) {
+    root.querySelectorAll('[data-vowel-sort]').forEach((sort) => {
+      const bank = sort.querySelector('[data-vowel-bank] .vowel-sort-bank-chips');
+      const status = sort.querySelector('.vowel-sort-status');
+      let selected = null;
+      const resetReview = (chip) => chip?.classList.remove('is-correct', 'is-wrong');
+      const announce = (text) => { if (status) status.textContent = text; };
+      const refresh = () => {
+        sort.querySelectorAll('[data-vowel-column]').forEach((zone) => zone.classList.toggle('has-names', !!zone.querySelector('[data-vowel-name]')));
+        sort.dispatchEvent(new Event('change', { bubbles: true }));
+      };
+      const choose = (chip) => {
+        if (selected === chip) {
+          if (chip.closest('[data-vowel-column]')) {
+            bank.appendChild(chip);
+            resetReview(chip);
+            announce(`${chip.dataset.vowelName} returned to the list.`);
+            refresh();
+          }
+          chip.classList.remove('is-selected');
+          selected = null;
+          return;
+        }
+        selected?.classList.remove('is-selected');
+        selected = chip;
+        chip.classList.add('is-selected');
+        announce(`${chip.dataset.vowelName} selected. Choose a column.`);
+      };
+      sort.addEventListener('click', (event) => {
+        const chip = event.target.closest('[data-vowel-name]');
+        if (chip) { choose(chip); return; }
+        const target = event.target.closest('[data-vowel-column]');
+        if (target && selected) {
+          target.appendChild(selected);
+          resetReview(selected);
+          announce(`${selected.dataset.vowelName} placed in ${target.getAttribute('aria-label')}.`);
+          selected.classList.remove('is-selected');
+          selected = null;
+          refresh();
+        }
+      });
+      sort.querySelectorAll('[data-vowel-column]').forEach((zone) => {
+        zone.addEventListener('keydown', (event) => {
+          if ((event.key === 'Enter' || event.key === ' ') && selected) {event.preventDefault();zone.click();}
+        });
+      });
+      sort.addEventListener('dragstart', (event) => {
+        const chip = event.target.closest('[data-vowel-name]');
+        if (!chip || !event.dataTransfer) return;
+        event.dataTransfer.setData('text/plain', chip.dataset.vowelName);
+        event.dataTransfer.effectAllowed = 'move';
+      });
+      sort.querySelectorAll('[data-vowel-column], [data-vowel-bank]').forEach((dropzone) => {
+        dropzone.addEventListener('dragover', (event) => {event.preventDefault();event.dataTransfer.dropEffect = 'move';dropzone.classList.add('drag-over');});
+        dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag-over'));
+        dropzone.addEventListener('drop', (event) => {
+          event.preventDefault();dropzone.classList.remove('drag-over');
+          const name = event.dataTransfer?.getData('text/plain');
+          const chip = [...sort.querySelectorAll('[data-vowel-name]')].find((x) => x.dataset.vowelName === name);
+          if (!chip) return;
+          const target = dropzone.hasAttribute('data-vowel-bank') ? bank : dropzone;
+          target.appendChild(chip);resetReview(chip);
+          selected?.classList.remove('is-selected'); selected = null;
+          announce(`${name} moved.`);refresh();
+        });
+      });
+    });
+  }
+
   function renderPresentPastTable(block, blockId) {
     const rows = Array.isArray(block.rows) ? block.rows : [];
     return `<div class="present-past-table" data-present-past-table>
@@ -1313,6 +1435,7 @@
   }
 
   function wireLessonInteractiveInputs(root) {
+    wireVowelSortExercise(root);
     root.querySelectorAll('[data-image-spelling-grid]').forEach((grid) => {
       grid.querySelectorAll('[data-exercise-item][data-input-type="image-spelling"]').forEach((item) => {
         const inputs = [...item.querySelectorAll('[data-spelling-letter]')];
@@ -1875,7 +1998,9 @@
           }).join('')}</div>`
         : '';
       const intro = block.introTitle || block.introText ? `<div class="exercise-source"><h4>${escapeHtml(block.introTitle || '')}</h4>${block.introText ? `<p>${escapeHtml(block.introText)}</p>` : ''}</div>` : '';
-      const exerciseContent = block.layout === 'dialogue'
+      const exerciseContent = block.layout === 'vowel-sort'
+        ? renderVowelSortExercise(block)
+        : block.layout === 'dialogue'
         ? renderDialogueExercise(block, id)
         : block.layout === 'crossword'
           ? renderCrosswordExercise(block, id)
@@ -2019,6 +2144,7 @@
   }
 
   function checkExerciseBlock(block, node, options = {}) {
+    if (block.layout === 'vowel-sort') return checkVowelSortBlock(block, node, options);
     if (block.layout === 'crossword-grid') return checkCrosswordGridBlock(block, node);
     if (block.layout === 'continuous-gaps') return checkContinuousGapsBlock(block, node, options);
     if (block.layout === 'ed-pronunciation') return checkEdPronunciationBlock(block, node);
@@ -2096,6 +2222,7 @@
 
   function restoreExerciseAnswers(block, node, saved) {
     if (!saved || typeof saved !== 'object') return;
+    if (block.layout === 'vowel-sort') { restoreVowelSortAnswers(block, node, saved); return; }
     if (block.layout === 'crossword-grid') { restoreCrosswordGridAnswers(block, node, saved); return; }
     if (block.layout === 'continuous-gaps') { restoreContinuousGapsAnswers(block, node, saved); return; }
     if (block.layout === 'ed-pronunciation') { restoreEdPronunciationAnswers(block, node, saved); return; }
@@ -2138,7 +2265,12 @@
         if (input) input.checked = true;
       } else if (inputType === 'select') {
         const select = itemNode.querySelector('select');
-        if (select) select.value = safeText(value);
+        if (select) {
+          const original = Array.isArray(value) ? safeText(value[0]) : safeText(value);
+          const previousTextAnswer = Array.isArray(value) && Array.isArray(item.options)
+            ? item.options.findIndex((candidate) => normalizeAnswer(candidate) === normalizeAnswer(original)) : -1;
+          select.value = previousTextAnswer >= 0 ? String(previousTextAnswer) : original;
+        }
       } else if (inputType === 'gaps') {
         const values = Array.isArray(value) ? value : [];
         itemNode.querySelectorAll('[data-gap-index]').forEach((input, gapIndex) => { input.value = safeText(values[gapIndex]); });
@@ -2310,9 +2442,12 @@
     root.addEventListener('change', scheduleDraftSave);
 
     // Restore not only the values, but also the green/red review state after reload.
-    if (savedResult && Number(savedResult.total) > 0) {
+    if (savedResult && Number(savedResult.total) > 0 && Number(savedResult.total) === Number(lesson.totalPoints)) {
       evaluateLesson();
       byId('lesson-result').innerHTML = `<h3>Saved score: ${Number(savedResult.correct || 0)} of ${Number(savedResult.total || 0)}</h3><p class="muted">${Number(savedResult.percent || 0)}% correct</p>`;
+    } else if (savedResult && Number(savedResult.total) > 0) {
+      byId('submit-lesson').disabled = true;
+      byId('lesson-result').innerHTML = '<p class="muted">This assignment has new questions. Your answers are kept; please check the updated assignment before submitting.</p>';
     }
 
     byId('check-lesson').addEventListener('click', () => {

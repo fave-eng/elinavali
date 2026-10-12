@@ -9,7 +9,7 @@
     "grammar-pronouns-1a"
   ],
   "publishedAt": "2026-10-12",
-  "totalPoints": 65,
+  "totalPoints": 80,
   "notification": {
     "enabled": true,
     "version": 1
@@ -47,7 +47,7 @@
         {
           "id": "item-2",
           "number": 2,
-          "input": "gaps",
+          "input": "select",
           "segments": [
             "a ",
             " is the name between a person’s first name and surname"
@@ -57,12 +57,21 @@
           ],
           "example": false,
           "exampleMode": null,
-          "exampleAnswers": null
+          "exampleAnswers": null,
+          "options": [
+            "first name",
+            "full name",
+            "initials",
+            "maiden name",
+            "married name",
+            "middle name"
+          ],
+          "answer": 5
         },
         {
           "id": "item-3",
           "number": 3,
-          "input": "gaps",
+          "input": "select",
           "segments": [
             "a woman’s ",
             " is her surname before she gets married"
@@ -72,12 +81,21 @@
           ],
           "example": false,
           "exampleMode": null,
-          "exampleAnswers": null
+          "exampleAnswers": null,
+          "options": [
+            "first name",
+            "full name",
+            "initials",
+            "maiden name",
+            "married name",
+            "middle name"
+          ],
+          "answer": 3
         },
         {
           "id": "item-4",
           "number": 4,
-          "input": "gaps",
+          "input": "select",
           "segments": [
             "a woman’s ",
             " is her surname after she gets married"
@@ -87,12 +105,21 @@
           ],
           "example": false,
           "exampleMode": null,
-          "exampleAnswers": null
+          "exampleAnswers": null,
+          "options": [
+            "first name",
+            "full name",
+            "initials",
+            "maiden name",
+            "married name",
+            "middle name"
+          ],
+          "answer": 4
         },
         {
           "id": "item-5",
           "number": 5,
-          "input": "gaps",
+          "input": "select",
           "segments": [
             "your ",
             " is your whole name, including your first name, any middle names, and your family name"
@@ -102,12 +129,21 @@
           ],
           "example": false,
           "exampleMode": null,
-          "exampleAnswers": null
+          "exampleAnswers": null,
+          "options": [
+            "first name",
+            "full name",
+            "initials",
+            "maiden name",
+            "married name",
+            "middle name"
+          ],
+          "answer": 1
         },
         {
           "id": "item-6",
           "number": 6,
-          "input": "gaps",
+          "input": "select",
           "segments": [
             "your ",
             " are the first letters of all your names"
@@ -117,7 +153,16 @@
           ],
           "example": false,
           "exampleMode": null,
-          "exampleAnswers": null
+          "exampleAnswers": null,
+          "options": [
+            "first name",
+            "full name",
+            "initials",
+            "maiden name",
+            "married name",
+            "middle name"
+          ],
+          "answer": 2
         }
       ],
       "hideAnswersOnError": true,
@@ -163,7 +208,7 @@
         {
           "id": "item-2",
           "number": 2,
-          "input": "gaps",
+          "input": "select",
           "segments": [
             "The ",
             " from the lamp creates a relaxing atmosphere in the room."
@@ -173,12 +218,25 @@
           ],
           "example": false,
           "exampleMode": null,
-          "exampleAnswers": null
+          "exampleAnswers": null,
+          "options": [
+            "a wide range of modern colours",
+            "brainpower",
+            "click together easily",
+            "delicious",
+            "for creative people",
+            "good for the planet",
+            "healthy",
+            "recyclable",
+            "simple building system",
+            "warm light"
+          ],
+          "answer": 9
         },
         {
           "id": "item-3",
           "number": 3,
-          "input": "gaps",
+          "input": "select",
           "segments": [
             "The ",
             " of some modern houses means they can be built in less than a day!"
@@ -188,12 +246,25 @@
           ],
           "example": false,
           "exampleMode": null,
-          "exampleAnswers": null
+          "exampleAnswers": null,
+          "options": [
+            "a wide range of modern colours",
+            "brainpower",
+            "click together easily",
+            "delicious",
+            "for creative people",
+            "good for the planet",
+            "healthy",
+            "recyclable",
+            "simple building system",
+            "warm light"
+          ],
+          "answer": 8
         },
         {
           "id": "item-4",
           "number": 4,
-          "input": "gaps",
+          "input": "select",
           "segments": [
             "The soup’s ",
             " . Can I have some more?"
@@ -203,12 +274,25 @@
           ],
           "example": false,
           "exampleMode": null,
-          "exampleAnswers": null
+          "exampleAnswers": null,
+          "options": [
+            "a wide range of modern colours",
+            "brainpower",
+            "click together easily",
+            "delicious",
+            "for creative people",
+            "good for the planet",
+            "healthy",
+            "recyclable",
+            "simple building system",
+            "warm light"
+          ],
+          "answer": 3
         },
         {
           "id": "item-5",
           "number": 5,
-          "input": "gaps",
+          "input": "select",
           "segments": [
             "Do you think that doing crosswords improves your ",
             "?"
@@ -218,12 +302,25 @@
           ],
           "example": false,
           "exampleMode": null,
-          "exampleAnswers": null
+          "exampleAnswers": null,
+          "options": [
+            "a wide range of modern colours",
+            "brainpower",
+            "click together easily",
+            "delicious",
+            "for creative people",
+            "good for the planet",
+            "healthy",
+            "recyclable",
+            "simple building system",
+            "warm light"
+          ],
+          "answer": 1
         },
         {
           "id": "item-6",
           "number": 6,
-          "input": "gaps",
+          "input": "select",
           "segments": [
             "The phone is available in ",
             "."
@@ -233,12 +330,25 @@
           ],
           "example": false,
           "exampleMode": null,
-          "exampleAnswers": null
+          "exampleAnswers": null,
+          "options": [
+            "a wide range of modern colours",
+            "brainpower",
+            "click together easily",
+            "delicious",
+            "for creative people",
+            "good for the planet",
+            "healthy",
+            "recyclable",
+            "simple building system",
+            "warm light"
+          ],
+          "answer": 0
         },
         {
           "id": "item-7",
           "number": 7,
-          "input": "gaps",
+          "input": "select",
           "segments": [
             "",
             " packaging is made of materials like glass or paper."
@@ -248,12 +358,25 @@
           ],
           "example": false,
           "exampleMode": null,
-          "exampleAnswers": null
+          "exampleAnswers": null,
+          "options": [
+            "a wide range of modern colours",
+            "brainpower",
+            "click together easily",
+            "delicious",
+            "for creative people",
+            "good for the planet",
+            "healthy",
+            "recyclable",
+            "simple building system",
+            "warm light"
+          ],
+          "answer": 7
         },
         {
           "id": "item-8",
           "number": 8,
-          "input": "gaps",
+          "input": "select",
           "segments": [
             "Our products are ",
             " – they don’t harm the environment."
@@ -263,12 +386,25 @@
           ],
           "example": false,
           "exampleMode": null,
-          "exampleAnswers": null
+          "exampleAnswers": null,
+          "options": [
+            "a wide range of modern colours",
+            "brainpower",
+            "click together easily",
+            "delicious",
+            "for creative people",
+            "good for the planet",
+            "healthy",
+            "recyclable",
+            "simple building system",
+            "warm light"
+          ],
+          "answer": 5
         },
         {
           "id": "item-9",
           "number": 9,
-          "input": "gaps",
+          "input": "select",
           "segments": [
             "If you want a ",
             " snack, have some fruit."
@@ -278,12 +414,25 @@
           ],
           "example": false,
           "exampleMode": null,
-          "exampleAnswers": null
+          "exampleAnswers": null,
+          "options": [
+            "a wide range of modern colours",
+            "brainpower",
+            "click together easily",
+            "delicious",
+            "for creative people",
+            "good for the planet",
+            "healthy",
+            "recyclable",
+            "simple building system",
+            "warm light"
+          ],
+          "answer": 6
         },
         {
           "id": "item-10",
           "number": 10,
-          "input": "gaps",
+          "input": "select",
           "segments": [
             "The model plane is very simple to build because the parts ",
             "."
@@ -293,7 +442,20 @@
           ],
           "example": false,
           "exampleMode": null,
-          "exampleAnswers": null
+          "exampleAnswers": null,
+          "options": [
+            "a wide range of modern colours",
+            "brainpower",
+            "click together easily",
+            "delicious",
+            "for creative people",
+            "good for the planet",
+            "healthy",
+            "recyclable",
+            "simple building system",
+            "warm light"
+          ],
+          "answer": 2
         }
       ],
       "hideAnswersOnError": true,
@@ -316,6 +478,123 @@
       "id": "pronun-section",
       "title": "2 PRONUNCIATION",
       "eyebrow": "Vowel sounds"
+    },
+    {
+      "type": "exercise",
+      "id": "pron-2a",
+      "title": "2a · Vowel sounds",
+      "instructions": "Write the names in the chart.",
+      "layout": "vowel-sort",
+      "columns": [
+        {
+          "key": "cat",
+          "label": "cat",
+          "cueStart": "c",
+          "cueVowel": "a",
+          "cueEnd": "t",
+          "ipa": "æ",
+          "symbol": "🐈"
+        },
+        {
+          "key": "train",
+          "label": "train",
+          "cueStart": "tr",
+          "cueVowel": "ai",
+          "cueEnd": "n",
+          "ipa": "eɪ",
+          "symbol": "🚂"
+        },
+        {
+          "key": "egg",
+          "label": "egg",
+          "cueStart": "",
+          "cueVowel": "e",
+          "cueEnd": "gg",
+          "ipa": "e",
+          "symbol": "🥚",
+          "example": "Adele"
+        },
+        {
+          "key": "tree",
+          "label": "tree",
+          "cueStart": "tr",
+          "cueVowel": "ee",
+          "cueEnd": "",
+          "ipa": "iː",
+          "symbol": "🌳"
+        },
+        {
+          "key": "fish",
+          "label": "fish",
+          "cueStart": "f",
+          "cueVowel": "i",
+          "cueEnd": "sh",
+          "ipa": "ɪ",
+          "symbol": "🐟"
+        },
+        {
+          "key": "bike",
+          "label": "bike",
+          "cueStart": "b",
+          "cueVowel": "i",
+          "cueEnd": "ke",
+          "ipa": "aɪ",
+          "symbol": "🚲"
+        },
+        {
+          "key": "horse",
+          "label": "horse",
+          "cueStart": "h",
+          "cueVowel": "or",
+          "cueEnd": "se",
+          "ipa": "ɔː",
+          "symbol": "🐎"
+        },
+        {
+          "key": "phone",
+          "label": "phone",
+          "cueStart": "ph",
+          "cueVowel": "o",
+          "cueEnd": "ne",
+          "ipa": "əʊ",
+          "symbol": "☎️"
+        }
+      ],
+      "names": [
+        "Alex",
+        "Bill",
+        "Caroline",
+        "Chris",
+        "Emily",
+        "Eve",
+        "James",
+        "Joe",
+        "Kate",
+        "Leo",
+        "Mike",
+        "Paula",
+        "Sam",
+        "Sean",
+        "Sophie"
+      ],
+      "answers": {
+        "Alex": "cat",
+        "Sam": "cat",
+        "James": "train",
+        "Kate": "train",
+        "Emily": "egg",
+        "Eve": "tree",
+        "Leo": "tree",
+        "Bill": "fish",
+        "Chris": "fish",
+        "Caroline": "bike",
+        "Mike": "bike",
+        "Paula": "horse",
+        "Sean": "horse",
+        "Joe": "phone",
+        "Sophie": "phone"
+      },
+      "hideAnswersOnError": true
     },
     {
       "type": "exercise",

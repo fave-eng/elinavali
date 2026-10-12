@@ -3511,3 +3511,63 @@ label.odd-option {
   .grammar-study-table th, .grammar-study-table td { padding: 8px 9px; }
   .grammar-study-panel-foot { margin-top: 5px; padding-top: 6px; }
 }
+
+
+/* English File 1A: select-from-list fields and visibly finished examples. */
+.exercise-card[data-task="vocab-1b"] .exercise-example,
+.exercise-card[data-task="vocab-speaking"] .exercise-example {
+  border-color: #a5b4fc; background: #f3f4ff; position: relative;
+}
+.exercise-card[data-task="vocab-1b"] .exercise-example::before,
+.exercise-card[data-task="vocab-speaking"] .exercise-example::before {
+  content: "EXAMPLE · COMPLETED"; display: block; width: fit-content;
+  font-size: .67rem; font-weight: 900; letter-spacing: .075em;
+  color: #3730a3; margin: 0 0 10px 43px;
+}
+.exercise-card[data-task="vocab-1b"] .example-gap-answer,
+.exercise-card[data-task="vocab-speaking"] .example-gap-answer {
+  padding: 0 7px 1px; border-bottom: 2px solid #4338ca; border-radius: 3px;
+  background: #e0e7ff;
+}
+.exercise-card[data-task="vocab-1b"] .sentence-select-gap select,
+.exercise-card[data-task="vocab-speaking"] .sentence-select-gap select {
+  width: min(100%, 290px); max-width: 100%; font-size: .89rem; font-weight: 650;
+  border: 1px solid #c7d2fe; border-bottom: 2px solid #6366f1;
+  background-color: #f8faff;
+}
+/* Original 2a layout: 4 columns + 4 columns, responsive while preserving the chart. */
+.vowel-sort { display: grid; gap: 16px; padding: 18px; background: #f6f8fb; }
+.vowel-sort-guidance { color: #475569; font-size: .88rem; line-height: 1.55; }
+.vowel-sort-bank { padding: 14px; border: 2px solid #d6dffd; border-radius: 14px; background: #fff; }
+.vowel-sort-bank.drag-over { background: #eef2ff; border-color: #6366f1; }
+.vowel-sort-bank-title { font-size: .74rem; font-weight: 850; color: #475569; margin-bottom: 9px; text-transform: uppercase; letter-spacing: .07em; }
+.vowel-sort-bank-chips { min-height: 45px; display: flex; flex-wrap: wrap; gap: 8px; }
+.vowel-name-chip { display: inline-flex; align-items: center; justify-content: center; min-height: 34px; padding: 5px 10px; border: 1px solid #a5b4fc; border-radius: 9px; background: #eef2ff; color: #312e81; font-size: .87rem; font-weight: 750; cursor: grab; touch-action: manipulation; }
+.vowel-name-chip.is-selected { outline: 3px solid #818cf8; outline-offset: 1px; background: #c7d2fe; }
+.vowel-name-chip.is-correct { background: #dcfce7; border-color: #16a34a; color: #166534; }
+.vowel-name-chip.is-wrong { background: #fff1f2; border-color: #f87171; color: #991b1b; }
+.vowel-sort-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; }
+.vowel-sort-column { min-width: 0; display: flex; flex-direction: column; border: 1px solid #dce4ee; border-radius: 12px; background: #fff; overflow: hidden; }
+.vowel-sort-column-head { min-height: 135px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 2px; padding: 11px 5px 9px; border-bottom: 1px solid #e2e8f0; text-align: center; }
+.vowel-sort-symbol { font-size: 1.7rem; line-height: 1.25; }
+.vowel-sort-column-number { color: #64748b; font-size: .71rem; font-weight: 800; }
+.vowel-sort-cue { font-size: .98rem; color: #0f172a; letter-spacing: -.01em; }
+.vowel-sort-cue strong { font-weight: 900; color: #3730a3; text-decoration: underline; text-underline-offset: 3px; }
+.vowel-sort-ipa { color: #1d4ed8; font-size: .94rem; font-weight: 800; font-family: 'Inter', 'Arial Unicode MS', sans-serif; }
+.vowel-sort-dropzone { flex: 1; min-height: 100px; padding: 9px 6px; display: flex; flex-direction: column; gap: 7px; align-items: stretch; background: #fbfdff; cursor: pointer; }
+.vowel-sort-dropzone.drag-over, .vowel-sort-dropzone:focus-visible { outline: 2px solid #6366f1; outline-offset: -2px; background: #eff6ff; }
+.vowel-sort-dropzone .vowel-name-chip { width: 100%; max-width: 100%; overflow-wrap: anywhere; }
+.vowel-sort-worked-example { display: grid; gap: 4px; justify-items: center; border: 1px solid #a5b4fc; border-radius: 9px; background: #eef2ff; color: #312e81; padding: 6px 3px; font-size: .88rem; }
+.vowel-example-tag { color: #4338ca; font-size: .6rem; font-weight: 900; letter-spacing: .07em; text-transform: uppercase; }
+.vowel-sort-drop-hint { font-size: .68rem; text-align: center; line-height: 1.4; color: #94a3b8; }
+.vowel-sort-dropzone.has-names .vowel-sort-drop-hint { display: none; }
+.vowel-sort-status { min-height: 1rem; font-size: .78rem; color: #475569; }
+@media (max-width: 560px) {
+  .vowel-sort { padding: 12px; }
+  .vowel-sort-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .vowel-sort-column-head { min-height: 130px; }
+  .vowel-sort-dropzone { min-height: 110px; }
+  .vowel-name-chip { font-size: .84rem; }
+  .exercise-card[data-task="vocab-1b"] .sentence-select-gap select,
+  .exercise-card[data-task="vocab-speaking"] .sentence-select-gap select {width: min(100%, 250px);}
+}
