@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Personal English learning space">
+  <title>Grammar topic</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="config.js" defer></script>
+  <script src="data/vocabulary-data.js" defer></script>
+  <script src="data/grammar-data.js?v=compare-4spoke-2" defer></script>
+  <script src="app.js?v=grammar-ru-1" defer></script>
+</head>
+<body class="has-bottom-nav" data-page="grammar" data-view="grammar-topic">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="hero hero-compact">
+    <span class="star one">✦</span><span class="star two">✦</span>
+    <div class="container hero-content reveal">
+      <span class="hero-badge">✦ <span data-config="level"></span> Level · Individual Course</span>
+      <h1><span id="grammar-hero-title">Grammar</span></h1>
+      <p><span id="grammar-hero-subtitle">Explanations and practice</span></p>
+    </div>
+    <svg class="hero-wave" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true"><path fill="#f8fafc" d="M0,66 C220,102 410,10 696,52 C963,91 1115,99 1440,35 L1440,100 L0,100 Z"></path></svg>
+  </header>
+
+  <main id="main" class="main-content container">
+
+    <section class="section reveal">
+      <div id="grammar-topic-root"></div>
+    </section>
+
+  </main>
+
+  <nav class="bottom-nav" aria-label="Main navigation">
+    <a class="nav-link" data-nav="home" href="index.html"><span class="nav-icon">🏠</span><span>Home</span></a>
+    <a class="nav-link" data-nav="homework" href="homework.html"><span class="nav-icon">📝</span><span>HW</span></a>
+    <a class="nav-link" data-nav="grammar" href="grammar.html"><span class="nav-icon">📐</span><span>Grammar</span></a>
+    <a class="nav-link" data-nav="vocabulary" href="vocabulary-hub.html"><span class="nav-icon">💥</span><span>Vocab</span></a>
+  </nav>
+  <div class="toast" id="app-toast" role="status" aria-live="polite"></div>
+
+</body>
+</html>

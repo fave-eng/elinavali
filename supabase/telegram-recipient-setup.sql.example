@@ -1,0 +1,16 @@
+-- EXAMPLE ONLY. DO NOT EXECUTE without configuring the correct chat/topic.
+-- Existing students and recipients must remain unchanged.
+-- Student ID: elinavali
+-- First: ensure table public.telegram_recipients exists from the shared multi-student backend.
+-- Second: obtain the correct Telegram chat ID and topic ID for Elina.
+-- Third: replace the placeholders before running the UPSERT below.
+
+-- INSERT INTO public.telegram_recipients (student_id, chat_id, message_thread_id, enabled)
+-- VALUES ('elinavali', REPLACE_WITH_CHAT_ID, REPLACE_WITH_TOPIC_ID, true)
+-- ON CONFLICT (student_id) DO UPDATE SET
+--   chat_id = excluded.chat_id,
+--   message_thread_id = excluded.message_thread_id,
+--   enabled = true,
+--   updated_at = now();
+
+-- Do not substitute Viktoria's Telegram topic or an unrelated existing student's ID.

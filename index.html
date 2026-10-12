@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Personal English learning space">
+  <title>English Space</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="config.js" defer></script>
+  <script src="data/vocabulary-data.js" defer></script>
+  <script src="data/grammar-data.js" defer></script>
+  <script src="app.js?v=autosave-3" defer></script>
+</head>
+<body class="has-bottom-nav" data-page="home" data-view="home">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="hero hero-home">
+    <span class="star one">✦</span><span class="star two">✦</span><span class="star three">✦</span>
+    <div class="container hero-content reveal">
+      <span class="hero-badge">✦ <span data-config="level"></span> Level · Individual Course</span>
+      <h1><span data-config="nameEn"></span>’s English Space 🚀</h1>
+      <p>Your personal space for growing your English</p>
+    </div>
+    <svg class="hero-wave" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true"><path fill="#f8fafc" d="M0,66 C220,102 410,10 696,52 C963,91 1115,99 1440,35 L1440,100 L0,100 Z"></path></svg>
+  </header>
+
+  <main id="main" class="main-content container">
+
+    <section class="section reveal" aria-labelledby="progress-title">
+      <div class="section-heading"><div><span class="eyebrow">Starting point</span><h2 id="progress-title">My progress</h2></div></div>
+      <div class="stats-grid">
+        <div class="card stat-card"><strong id="home-stat-completed">0</strong><span>Homework completed</span></div>
+        <div class="card stat-card"><strong id="vocab-stat-known">0</strong><span>Words learned</span></div>
+        <div class="card stat-card"><strong id="grammar-stat-passed">0</strong><span>Grammar topics</span></div>
+        <div class="card stat-card"><strong data-config="level"></strong><span>Level</span></div>
+      </div>
+      <div class="card section">
+        <div class="progress-list" id="home-progress-list"></div>
+      </div>
+    </section>
+
+    <section class="section reveal" aria-labelledby="quick-title">
+      <div class="section-heading"><div><span class="eyebrow">Navigation</span><h2 id="quick-title">Quick access</h2></div></div>
+      <div class="quick-grid">
+        <a class="card interactive quick-card" href="homework.html">
+          <div><div class="icon-box icon-indigo">📝</div><h3>Homework</h3><p>Interactive exercises and tasks after each lesson.</p></div><span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="card interactive quick-card" href="vocabulary-hub.html">
+          <div><div class="icon-box icon-rose">💥</div><h3>Vocabulary Hub</h3><p>Flashcards and practice tools for learning new words.</p></div><span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="card interactive quick-card wide" href="grammar.html">
+          <div><div class="icon-box icon-sky">📐</div><h3>Grammar</h3><p>Clear explanations and practice for published grammar topics.</p></div><span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section reveal" aria-labelledby="current-title">
+      <div class="section-heading"><div><span class="eyebrow">Continue</span><h2 id="current-title">Current material</h2></div></div>
+      <div id="current-material"></div>
+    </section>
+
+    <section class="section reveal" aria-labelledby="knowledge-title">
+      <div class="section-heading"><div><span class="eyebrow">Reference</span><h2 id="knowledge-title">Knowledge base</h2></div></div>
+      <div class="card empty-state"><div class="empty-state-icon">🧠</div><h3>Reference materials will appear gradually</h3><p>Teacher-published notes, rules and revision materials will be stored here.</p></div>
+    </section>
+
+    <section class="section reveal" aria-labelledby="book-title">
+      <div class="card book-card">
+        <div class="book-cover" aria-hidden="true">📘</div>
+        <div><span class="eyebrow">Main coursebook</span><h3 id="book-title" data-config="textbook"></h3><p class="book-edition" data-config="textbookEdition"></p></div>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="bottom-nav" aria-label="Main navigation">
+    <a class="nav-link" data-nav="home" href="index.html"><span class="nav-icon">🏠</span><span>Home</span></a>
+    <a class="nav-link" data-nav="homework" href="homework.html"><span class="nav-icon">📝</span><span>HW</span></a>
+    <a class="nav-link" data-nav="grammar" href="grammar.html"><span class="nav-icon">📐</span><span>Grammar</span></a>
+    <a class="nav-link" data-nav="vocabulary" href="vocabulary-hub.html"><span class="nav-icon">💥</span><span>Vocab</span></a>
+  </nav>
+  <div class="toast" id="app-toast" role="status" aria-live="polite"></div>
+
+</body>
+</html>

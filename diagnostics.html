@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Диагностика подключений · English Space · Elina</title>
+  <style>
+    :root{color-scheme:light;--bg:#f5f7fb;--card:#fff;--ink:#111827;--muted:#64748b;--line:#dbe3ef;--ok:#067647;--okbg:#ecfdf3;--bad:#b42318;--badbg:#fef3f2;--warn:#b54708;--warnbg:#fffaeb;--accent:#5b45e0;--dark:#101828}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.45}
+    .wrap{width:min(1040px,calc(100% - 28px));margin:36px auto 70px}.hero{padding:28px;border-radius:24px;background:linear-gradient(135deg,#4f46e5,#8b2cf5);color:white;box-shadow:0 18px 48px rgba(58,35,154,.18)}
+    .hero h1{font-size:clamp(28px,5vw,46px);line-height:1.05;margin:8px 0 12px}.hero p{max-width:760px;margin:0;opacity:.9}.badge{display:inline-flex;padding:6px 10px;border:1px solid rgba(255,255,255,.35);border-radius:999px;font-weight:700;font-size:13px}
+    .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.btn{appearance:none;border:0;border-radius:13px;padding:12px 16px;font:inherit;font-weight:800;cursor:pointer;background:var(--accent);color:white}.btn.secondary{background:#fff;color:#344054;border:1px solid var(--line)}.btn.dark{background:var(--dark)}.btn:disabled{opacity:.55;cursor:not-allowed}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 8px 24px rgba(16,24,40,.04)}.card.wide{grid-column:1/-1}.card h2{margin:0 0 4px;font-size:20px}.card .sub{margin:0 0 16px;color:var(--muted);font-size:14px}
+    .check{display:grid;grid-template-columns:28px 1fr;gap:10px;padding:12px 0;border-top:1px solid #edf1f6}.check:first-of-type{border-top:0}.ico{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:900;background:#eef2f6;color:#667085}.check.ok .ico{background:var(--okbg);color:var(--ok)}.check.bad .ico{background:var(--badbg);color:var(--bad)}.check.warn .ico{background:var(--warnbg);color:var(--warn)}.name{font-weight:800}.detail{font-size:13px;color:var(--muted);overflow-wrap:anywhere}.check.bad .detail{color:var(--bad)}.check.warn .detail{color:var(--warn)}
+    .summary{border-radius:16px;padding:14px 16px;margin-top:14px;background:#eef2ff;color:#3730a3;font-weight:700}.summary.ok{background:var(--okbg);color:var(--ok)}.summary.bad{background:var(--badbg);color:var(--bad)}.summary.warn{background:var(--warnbg);color:var(--warn)}
+    .kv{display:grid;grid-template-columns:minmax(150px,.7fr) 1.3fr;gap:8px 12px;padding:8px 0;border-bottom:1px solid #edf1f6;font-size:14px}.kv:last-child{border-bottom:0}.kv span:first-child{color:var(--muted)}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;overflow-wrap:anywhere}
+    pre{margin:12px 0 0;padding:14px;background:#0b1220;color:#d0d5dd;border-radius:14px;white-space:pre-wrap;overflow:auto;font-size:12px;max-height:390px}.note{padding:12px 14px;border-radius:14px;background:#f8fafc;border:1px solid var(--line);font-size:13px;color:#475467}.test-result{margin-top:12px}
+    @media(max-width:760px){.wrap{margin-top:18px}.grid{grid-template-columns:1fr}.card.wide{grid-column:auto}.kv{grid-template-columns:1fr}.hero{padding:22px}.btn{width:100%}}
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="config.js" defer></script>
+  <script src="diagnostics.js?v=20260814-1" defer></script>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <span class="badge">Служебная страница · не влияет на прогресс</span>
+      <h1>Диагностика подключений</h1>
+      <p>Проверяет цепочку браузер → Supabase → Edge Function → Telegram для пространства Элины. Здесь нет тестовых домашних работ; технические записи создаются только на время отдельной проверки и удаляются после неё.</p>
+    </section>
+
+    <div class="toolbar">
+      <button class="btn" id="run-all">Проверить всё</button>
+      <button class="btn secondary" id="copy-report">Скопировать отчёт</button>
+      <button class="btn secondary" id="reload-page">Перезагрузить страницу</button>
+    </div>
+
+    <section class="grid">
+      <article class="card wide">
+        <h2>Состояние подключения</h2>
+        <p class="sub">Проверки выполняются последовательно. Первая красная строка обычно показывает место поломки.</p>
+        <div id="checks"></div>
+        <div id="main-summary" class="summary">Нажми «Проверить всё».</div>
+      </article>
+
+      <article class="card">
+        <h2>Текущая конфигурация</h2>
+        <p class="sub">Данные берутся из опубликованного config.js.</p>
+        <div id="config-info"></div>
+      </article>
+
+      <article class="card">
+        <h2>Telegram</h2>
+        <p class="sub">Получатель и тема берутся из серверной настройки. Если отдельная тема не используется, thread_id будет NULL.</p>
+        <div id="telegram-info"></div>
+        <div class="note" style="margin-top:12px">Обычная проверка состояния не отправляет сообщений. Сообщение уходит только по отдельной кнопке ниже.</div>
+      </article>
+
+      <article class="card wide">
+        <h2>Тест записи Supabase</h2>
+        <p class="sub">Создаёт временную техническую запись, проверяет путь browser/RLS → checked → submitted → cleanup и затем удаляет тестовую строку. Настоящие домашние работы не изменяются.</p>
+        <button class="btn dark" id="test-db-write">Проверить запись homework_progress</button>
+        <div id="db-write-result" class="test-result"></div>
+      </article>
+
+      <article class="card wide">
+        <h2>Тестовый Telegram-отчёт</h2>
+        <p class="sub">Отправка станет доступна только после настройки получателя Telegram и включения telegramNotifications в config.js. Пока уведомления отключены.</p>
+        <button class="btn dark" id="send-test-report">Отправить тестовый отчёт в Telegram</button>
+        <div id="send-result" class="test-result"></div>
+      </article>
+
+      <article class="card wide">
+        <h2>Последние данные диагностики</h2>
+        <p class="sub">Если что-то не работает, можно прислать скриншот этого блока или нажать «Скопировать отчёт».</p>
+        <pre id="raw-output">Проверка ещё не запускалась.</pre>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

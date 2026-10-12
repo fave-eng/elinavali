@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Personal English learning space">
+  <title>Homework lesson</title>
+  <link rel="stylesheet" href="styles.css?v=7">
+
+  <style>
+    /* Lesson images can be stored directly inside lesson JSON as data URLs. */
+    .exercise-card.exercise-layout-media-list .exercise-item.has-item-media {
+      display: grid;
+      grid-template-columns: 118px minmax(0, 1fr);
+      grid-template-areas: "media header" "media control" "media feedback";
+      column-gap: 18px;
+      align-items: start;
+    }
+    .exercise-card.exercise-layout-media-list .exercise-item-media {
+      grid-area: media;
+      width: 118px;
+      margin: 0;
+      align-self: start;
+    }
+    .exercise-card.exercise-layout-media-list .exercise-item-media img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #f1f5f9;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+    }
+    .exercise-card.exercise-layout-media-list .exercise-item.has-item-media .exercise-item-header { grid-area: header; }
+    .exercise-card.exercise-layout-media-list .exercise-item.has-item-media .exercise-control { grid-area: control; padding-left: 0; }
+    .exercise-card.exercise-layout-media-list .exercise-item.has-item-media > .feedback { grid-area: feedback; }
+    @media (max-width: 620px) {
+      .exercise-card.exercise-layout-media-list .exercise-item.has-item-media { grid-template-columns: 92px minmax(0, 1fr); column-gap: 12px; }
+      .exercise-card.exercise-layout-media-list .exercise-item-media { width: 92px; }
+    }
+    @media (max-width: 420px) {
+      .exercise-card.exercise-layout-media-list .exercise-item.has-item-media {
+        grid-template-columns: 84px minmax(0, 1fr);
+        grid-template-areas: "media header" "control control" "feedback feedback";
+        row-gap: 12px;
+      }
+      .exercise-card.exercise-layout-media-list .exercise-item-media { width: 84px; }
+      .exercise-card.exercise-layout-media-list .exercise-item.has-item-media .exercise-item-header { margin-bottom: 0; }
+    }
+
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="config.js" defer></script>
+  <script src="data/vocabulary-data.js" defer></script>
+  <script src="data/grammar-data.js" defer></script>
+  <script src="app.js?v=autosave-3save-1" defer></script>
+</head>
+<body class="has-bottom-nav" data-page="homework" data-view="lesson">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="hero hero-compact">
+    <span class="star one">✦</span><span class="star two">✦</span>
+    <div class="container hero-content reveal">
+      <span class="hero-badge">✦ <span data-config="level"></span> Level · Individual Course</span>
+      <h1><span id="lesson-hero-title">Assignment</span></h1>
+      <p><span id="lesson-hero-subtitle">Lesson material</span></p>
+    </div>
+    <svg class="hero-wave" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true"><path fill="#f8fafc" d="M0,66 C220,102 410,10 696,52 C963,91 1115,99 1440,35 L1440,100 L0,100 Z"></path></svg>
+  </header>
+
+  <main id="main" class="main-content container">
+
+    <a class="lesson-back-link" href="homework.html">
+  <span aria-hidden="true">←</span>
+  Back to assignments
+</a>
+
+    <section class="section reveal">
+      <div id="lesson-root"></div>
+    </section>
+
+  </main>
+
+  <nav class="bottom-nav" aria-label="Main navigation">
+    <a class="nav-link" data-nav="home" href="index.html"><span class="nav-icon">🏠</span><span>Home</span></a>
+    <a class="nav-link" data-nav="homework" href="homework.html"><span class="nav-icon">📝</span><span>HW</span></a>
+    <a class="nav-link" data-nav="grammar" href="grammar.html"><span class="nav-icon">📐</span><span>Grammar</span></a>
+    <a class="nav-link" data-nav="vocabulary" href="vocabulary-hub.html"><span class="nav-icon">💥</span><span>Vocab</span></a>
+  </nav>
+  <div class="toast" id="app-toast" role="status" aria-live="polite"></div>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const root = document.getElementById('lesson-root');
+      const lessonId = new URLSearchParams(location.search).get('id');
+      if (!root || !lessonId || !/^[a-zA-Z0-9_-]+$/.test(lessonId)) return;
+
+      const esc = (value) => window.CSS?.escape
+        ? CSS.escape(String(value))
+        : String(value).replace(/[^a-zA-Z0-9_-]/g, '\\$&');
+
+      let lesson = null;
+      let applying = false;
+
+      const applyImages = () => {
+        if (!lesson || applying) return;
+        applying = true;
+        try {
+          for (const block of Array.isArray(lesson.blocks) ? lesson.blocks : []) {
+            if (block?.type !== 'exercise' || !block.id || !Array.isArray(block.items)) continue;
+            const exercise = root.querySelector(`[data-task="${esc(block.id)}"]`);
+            if (!exercise) continue;
+            if (block.layout === 'media-list') exercise.classList.add('exercise-layout-media-list');
+
+            for (const item of block.items) {
+              if (!item?.id || !item.image) continue;
+              const node = exercise.querySelector(`[data-exercise-item="${esc(item.id)}"]`);
+              if (!node || node.dataset.mediaEnhanced === 'true') continue;
+
+              const figure = document.createElement('figure');
+              figure.className = 'exercise-item-media';
+              const image = document.createElement('img');
+              image.src = item.image;
+              image.alt = item.imageAlt || '';
+              image.loading = 'lazy';
+              image.decoding = 'async';
+              figure.appendChild(image);
+              node.insertBefore(figure, node.firstChild);
+              node.classList.add('has-item-media');
+              node.dataset.mediaEnhanced = 'true';
+            }
+          }
+        } finally {
+          applying = false;
+        }
+      };
+
+      new MutationObserver(applyImages).observe(root, { childList: true, subtree: true });
+      fetch(`data/lessons/${encodeURIComponent(lessonId)}.json?embedded-media=1`, { cache: 'no-store' })
+        .then((response) => {
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return response.json();
+        })
+        .then((data) => {
+          lesson = data;
+          applyImages();
+
+        })
+        .catch((error) => console.warn('Lesson images were not loaded.', error));
+    });
+  </script>
+
+</body>
+</html>

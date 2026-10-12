@@ -1,0 +1,17 @@
+{
+  "id": "lesson-1",
+  "number": 1,
+  "title": "New B1 lesson",
+  "subtitle": "Short assignment description",
+  "status": "draft",
+  "vocabularyId": "vocab-lesson-1",
+  "grammarIds": [],
+  "publishedAt": "YYYY-MM-DD",
+  "totalPoints": 0,
+  "notification": {
+    "enabled": false,
+    "version": 1
+  },
+  "templateNote": "The next homework assignment must be stored in lesson-1.json. For every new assignment, increase the number in the file name, id, number, vocabularyId and linkedLessonId together.",
+  "blocks": []
+}

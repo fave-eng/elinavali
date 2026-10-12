@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Personal English learning space">
+  <title>Vocabulary trainer</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .vocab-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 44px;
+      margin-bottom: 14px;
+      padding: 9px 14px;
+      border: 1px solid rgba(255,255,255,.24);
+      border-radius: 999px;
+      background: rgba(255,255,255,.12);
+      color: #fff;
+      font-weight: 750;
+      backdrop-filter: blur(10px);
+      transition: background .2s ease, transform .2s ease;
+    }
+    .vocab-back-link:hover { background: rgba(255,255,255,.2); transform: translateX(-2px); }
+    .vocab-back-link:focus-visible,
+    .pronounce-btn:focus-visible { outline: 3px solid rgba(255,255,255,.8); outline-offset: 3px; }
+    .vocab-back-arrow { font-size: 1.25rem; line-height: 1; }
+
+    .pronounce-btn {
+      display: inline-grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      flex: 0 0 auto;
+      border: 1.5px solid #c7d2fe;
+      border-radius: 50%;
+      background: #eef2ff;
+      color: #4338ca;
+      cursor: pointer;
+      font-size: 1.05rem;
+      box-shadow: none;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .pronounce-btn:hover { transform: scale(1.06); background: #e0e7ff; border-color: #a5b4fc; }
+    .pronounce-btn.is-speaking { animation: vocab-pulse .75s ease-in-out infinite alternate; }
+    .pronounce-btn.is-unavailable { opacity: .45; cursor: not-allowed; }
+    @keyframes vocab-pulse { from { transform: scale(1); } to { transform: scale(1.1); } }
+
+    .flash-pronounce { margin-top: 16px; }
+    .word-card-pronounce {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 38px;
+      height: 38px;
+    }
+    .word-card.has-pronunciation { position: relative; padding-right: 60px; }
+
+    @media (max-width: 520px) {
+      .vocab-back-link { font-size: .9rem; }
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="config.js" defer></script>
+  <script src="data/vocabulary-data.js" defer></script>
+  <script src="data/grammar-data.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body class="has-bottom-nav" data-page="vocabulary" data-view="vocabulary">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="hero hero-compact">
+    <span class="star one">✦</span><span class="star two">✦</span>
+    <div class="container hero-content reveal">
+      <a class="vocab-back-link" href="vocabulary-hub.html" aria-label="Back to vocabulary topics"><span class="vocab-back-arrow" aria-hidden="true">←</span><span>Back to topics</span></a>
+      <br>
+      <span class="hero-badge">✦ <span data-config="level"></span> Level · Individual Course</span>
+      <h1><span id="vocab-hero-title">Vocabulary</span></h1>
+      <p><span id="vocab-hero-subtitle">Personal vocabulary trainer</span></p>
+    </div>
+    <svg class="hero-wave" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true"><path fill="#f8fafc" d="M0,66 C220,102 410,10 696,52 C963,91 1115,99 1440,35 L1440,100 L0,100 Z"></path></svg>
+  </header>
+
+  <main id="main" class="main-content container">
+
+    <section class="section reveal">
+      <div id="vocabulary-root"></div>
+    </section>
+
+  </main>
+
+  <nav class="bottom-nav" aria-label="Main navigation">
+    <a class="nav-link" data-nav="home" href="index.html"><span class="nav-icon">🏠</span><span>Home</span></a>
+    <a class="nav-link" data-nav="homework" href="homework.html"><span class="nav-icon">📝</span><span>HW</span></a>
+    <a class="nav-link" data-nav="grammar" href="grammar.html"><span class="nav-icon">📐</span><span>Grammar</span></a>
+    <a class="nav-link" data-nav="vocabulary" href="vocabulary-hub.html"><span class="nav-icon">💥</span><span>Vocab</span></a>
+  </nav>
+  <div class="toast" id="app-toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (() => {
+      'use strict';
+
+      /*
+       * The same pronunciation method as in the reference vocabulary file:
+       * system Web Speech API, British English (en-GB),
+       * standard device speed, pitch and volume.
+       */
+      const speech = window.speechSynthesis;
+      let activeButton = null;
+
+      function stopAudio() {
+        if (speech) speech.cancel();
+        if (activeButton) {
+          activeButton.classList.remove('is-speaking');
+          activeButton = null;
+        }
+      }
+
+      function showAudioError() {
+        const toast = document.getElementById('app-toast');
+        if (!toast) return;
+        toast.textContent = 'Pronunciation is unavailable on this device.';
+        toast.classList.add('show');
+        window.setTimeout(() => toast.classList.remove('show'), 2800);
+      }
+
+      function prepareSpeechText(text) {
+        return String(text || '')
+          .trim()
+          .replace(/\s*\/\s*/g, ' or ');
+      }
+
+      function playPronunciation(text, button = null) {
+        const cleanText = prepareSpeechText(text);
+        if (!cleanText || !speech || typeof SpeechSynthesisUtterance === 'undefined') {
+          showAudioError();
+          return;
+        }
+
+        stopAudio();
+        activeButton = button;
+        button?.classList.add('is-speaking');
+
+        const utterance = new SpeechSynthesisUtterance(cleanText);
+        utterance.lang = 'en-GB';
+        utterance.rate = 1;
+        utterance.pitch = 1;
+        utterance.volume = 1;
+
+        utterance.onend = () => {
+          if (activeButton === button) stopAudio();
+        };
+        utterance.onerror = (event) => {
+          if (event?.error !== 'canceled' && event?.error !== 'interrupted') {
+            showAudioError();
+          }
+          if (activeButton === button) stopAudio();
+        };
+
+        speech.speak(utterance);
+      }
+
+      function makeButton(word, extraClass = '') {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = `pronounce-btn ${extraClass}`.trim();
+        button.setAttribute('aria-label', `Listen to the pronunciation: ${word}`);
+        button.title = `Listen: ${word}`;
+        button.textContent = '🔊';
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          playPronunciation(word, button);
+        });
+        return button;
+      }
+
+      function decorateFlashcard(root) {
+        const front = root.querySelector('.flash-front');
+        const wordNode = front?.querySelector('.flash-word');
+        if (!front || !wordNode || front.querySelector('.flash-pronounce')) return;
+        front.appendChild(makeButton(wordNode.textContent, 'flash-pronounce'));
+      }
+
+      function decorateWordList(root) {
+        root.querySelectorAll('.word-card').forEach((card) => {
+          if (card.querySelector('.word-card-pronounce')) return;
+          const wordNode = card.querySelector('strong');
+          if (!wordNode) return;
+          card.classList.add('has-pronunciation');
+          card.appendChild(makeButton(wordNode.textContent, 'word-card-pronounce'));
+        });
+      }
+
+      function reorderVocabularyModes(root) {
+        const modes = root.querySelector('#vocab-modes');
+        if (!modes || modes.dataset.orderReady === 'true') return;
+
+        const labels = {
+          all: 'All words',
+          cards: 'Flashcards',
+          difficult: 'Difficult',
+          test: 'Test'
+        };
+        const order = ['all', 'cards', 'difficult', 'test'];
+
+        order.forEach((modeName) => {
+          const button = modes.querySelector(`[data-mode="${modeName}"]`);
+          if (!button) return;
+          button.textContent = labels[modeName];
+          modes.appendChild(button);
+        });
+
+        modes.dataset.orderReady = 'true';
+        const allWordsButton = modes.querySelector('[data-mode="all"]');
+        window.requestAnimationFrame(() => allWordsButton?.click());
+      }
+
+      function decorateVocabulary() {
+        const root = document.getElementById('vocabulary-root');
+        if (!root) return;
+        reorderVocabularyModes(root);
+        decorateFlashcard(root);
+        decorateWordList(root);
+      }
+
+      const root = document.getElementById('vocabulary-root');
+      if (root) {
+        const observer = new MutationObserver(decorateVocabulary);
+        observer.observe(root, { childList: true, subtree: true });
+        decorateVocabulary();
+      }
+
+      window.addEventListener('pagehide', stopAudio);
+    })();
+  </script>
+</body>
+</html>
