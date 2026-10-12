@@ -2486,6 +2486,50 @@
     renderPractice();
   }
 
+  // Data-driven grammar chapters. Old topics continue using their previous renderer.
+  // Study-guide blocks are escaped text; no unchecked HTML from lesson data is injected.
+  function renderGrammarStudyBlock(block) {
+    if (!block || !block.type) return '';
+    const h = (value) => escapeHtml(value || '');
+    const title = block.title ? `<h4 class="grammar-study-block-title">${h(block.title)}</h4>` : '';
+    if (block.type === 'syntax') {
+      const parts = Array.isArray(block.tokens) ? block.tokens : [];
+      return `<div class="grammar-study-block grammar-study-syntax">${title}
+        <div class="grammar-study-syntax-row" role="group" aria-label="Sentence structure">${parts.map((part) => `<div class="grammar-study-syntax-token grammar-study-${['subject','verb','object','receiver','neutral'].includes(part.tone) ? part.tone : 'neutral'}"><div class="grammar-study-syntax-word">${h(part.text)}</div><div class="grammar-study-syntax-role">${h(part.role)}</div><div class="grammar-study-syntax-detail">${h(part.detail)}</div></div>`).join('')}</div>
+        ${block.translation ? `<p class="grammar-study-translation">${h(block.translation)}</p>` : ''}
+        ${block.note ? `<p class="grammar-study-caption">${h(block.note)}</p>` : ''}</div>`;
+    }
+    if (block.type === 'contrast') {
+      const panel = (item) => `<div class="grammar-study-contrast-panel"><span class="grammar-study-panel-label">${h(item?.label)}</span><div class="grammar-study-panel-pattern">${h(item?.pattern)}</div><p class="grammar-study-panel-meaning">${h(item?.meaning)}</p><div class="grammar-study-panel-examples">${(item?.examples || []).map((ex) => `<p lang="en">${h(ex)}</p>`).join('')}</div><p class="grammar-study-panel-foot">${h(item?.note)}</p></div>`;
+      return `<div class="grammar-study-block">${title}<div class="grammar-study-contrast">${panel(block.left)}${panel(block.right)}</div></div>`;
+    }
+    if (block.type === 'table') {
+      return `<div class="grammar-study-block grammar-study-table">${title}${grammarTable(block)}${block.note ? `<p class="grammar-study-caption">${h(block.note)}</p>` : ''}</div>`;
+    }
+    if (block.type === 'examples') {
+      const rows = Array.isArray(block.rows) ? block.rows : [];
+      return `<div class="grammar-study-block">${title}<div class="grammar-study-example-list">${rows.map((row) => `<div class="grammar-study-example"><p class="grammar-study-example-en" lang="en">${h(row.en)}</p>${row.ru ? `<p class="grammar-study-example-ru" lang="ru">${h(row.ru)}</p>` : ''}${row.why ? `<p class="grammar-study-example-why">${h(row.why)}</p>` : ''}</div>`).join('')}</div></div>`;
+    }
+    if (block.type === 'note') {
+      const tone = ['remember','important'].includes(block.tone) ? block.tone : 'important';
+      return `<aside class="grammar-study-block grammar-study-note grammar-study-note-${tone}">${title}<p>${h(block.text)}</p>${(block.examples || []).length ? `<div class="grammar-study-note-examples">${block.examples.map((item) => `<p lang="en">${h(item)}</p>`).join('')}</div>` : ''}</aside>`;
+    }
+    if (block.type === 'decision') {
+      return `<div class="grammar-study-block grammar-study-decision">${title}<div class="grammar-study-decision-list">${(block.steps || []).map((step, index) => `<div class="grammar-study-decision-step"><span class="grammar-study-decision-num">${index + 1}</span><div><p class="grammar-study-decision-question">${h(step.if)}</p><p class="grammar-study-decision-answer">${h(step.then)}</p><p class="grammar-study-decision-example" lang="en">${h(step.example)}</p></div></div>`).join('')}</div></div>`;
+    }
+    return '';
+  }
+
+  function renderGrammarStudyGuide(topic) {
+    const guide = topic.studyGuide;
+    if (!guide || !Array.isArray(guide.sections) || !guide.sections.length) return '';
+    const h = (value) => escapeHtml(value || '');
+    return `<div class="grammar-study-guide">
+      <header class="grammar-study-front card"><div class="eyebrow">${h(guide.eyebrow)}</div><h2>${h(topic.title)}</h2><p class="grammar-study-lead">${h(guide.intro)}</p>${guide.promise ? `<p class="grammar-study-outcome">${h(guide.promise)}</p>` : ''}</header>
+      <nav class="grammar-study-nav" aria-label="Разделы объяснения"><div class="grammar-study-nav-title">План темы</div><div class="grammar-study-nav-items">${guide.sections.map((section) => `<a href="#${h(section.id)}"><span>${h(section.number)}</span>${h(section.title)}</a>`).join('')}<a href="#grammar-practice-section"><span>08</span>Практика</a></div></nav>
+      ${guide.sections.map((section) => `<section class="grammar-study-chapter" id="${h(section.id)}"><header class="grammar-study-chapter-head"><span class="grammar-study-chapter-index">${h(section.number)}</span><div><span class="grammar-study-chapter-kicker">${h(section.kicker)}</span><h2>${h(section.title)}</h2></div></header><div class="grammar-study-chapter-body">${section.intro ? `<p class="grammar-study-chapter-intro">${h(section.intro)}</p>` : ''}${(section.blocks || []).map((block) => renderGrammarStudyBlock(block)).join('')}</div></section>`).join('')}</div>`;
+  }
+
   function renderGrammarTopic() {
     const id = queryParam('id');
     const topic = GRAMMAR_DATA.find((item) => item.id === id && item.status !== 'draft');
@@ -2497,6 +2541,13 @@
 
     byId('grammar-hero-title').textContent = safeText(topic.title, 'Грамматика');
     byId('grammar-hero-subtitle').textContent = `${safeText(topic.level, student.level)} уровень · объяснение и практика`;
+
+    if (topic.studyGuide && Array.isArray(topic.studyGuide.sections) && topic.studyGuide.sections.length) {
+      root.innerHTML = `${renderGrammarStudyGuide(topic)}
+        <section class="section" id="grammar-practice-section" aria-labelledby="grammar-practice-title"><div class="section-heading"><div><span class="eyebrow">Practice · 16 вопросов</span><h2 id="grammar-practice-title">Закрепи тему на практике</h2><p>4 упражнения по 4 задания, от простого к сложному</p></div></div><div id="grammar-quiz"></div></section>`;
+      renderGrammarPractice(topic, byId('grammar-quiz'));
+      return;
+    }
 
     const glanceCards = Array.isArray(topic.glanceCards) ? topic.glanceCards : [];
     const anchorLinks = Array.isArray(topic.anchorLinks) ? topic.anchorLinks : [];
