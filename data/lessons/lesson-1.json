@@ -1,0 +1,1132 @@
+{
+  "id": "lesson-1",
+  "number": 1,
+  "title": "1A · Why did they call you that?",
+  "subtitle": "English File Intermediate Plus (4th edition) · Names, vowel sounds & pronouns",
+  "status": "available",
+  "vocabularyId": "vocab-lesson-1",
+  "grammarIds": [
+    "grammar-pronouns-1a"
+  ],
+  "publishedAt": "2026-10-12",
+  "totalPoints": 65,
+  "notification": {
+    "enabled": true,
+    "version": 1
+  },
+  "blocks": [
+    {
+      "type": "section",
+      "id": "vocab-unit",
+      "title": "1 VOCABULARY",
+      "eyebrow": "1A · Names"
+    },
+    {
+      "type": "exercise",
+      "id": "vocab-1b",
+      "title": "1b · Names",
+      "instructions": "Complete the definitions with a word from the list.",
+      "items": [
+        {
+          "id": "item-1",
+          "number": 1,
+          "input": "gaps",
+          "segments": [
+            "your ",
+            " is a name that your parents choose for you when you are born"
+          ],
+          "answers": [
+            "first name"
+          ],
+          "example": true,
+          "exampleMode": "gaps",
+          "exampleAnswers": [
+            "first name"
+          ]
+        },
+        {
+          "id": "item-2",
+          "number": 2,
+          "input": "gaps",
+          "segments": [
+            "a ",
+            " is the name between a person’s first name and surname"
+          ],
+          "answers": [
+            "middle name"
+          ],
+          "example": false,
+          "exampleMode": null,
+          "exampleAnswers": null
+        },
+        {
+          "id": "item-3",
+          "number": 3,
+          "input": "gaps",
+          "segments": [
+            "a woman’s ",
+            " is her surname before she gets married"
+          ],
+          "answers": [
+            "maiden name"
+          ],
+          "example": false,
+          "exampleMode": null,
+          "exampleAnswers": null
+        },
+        {
+          "id": "item-4",
+          "number": 4,
+          "input": "gaps",
+          "segments": [
+            "a woman’s ",
+            " is her surname after she gets married"
+          ],
+          "answers": [
+            "married name"
+          ],
+          "example": false,
+          "exampleMode": null,
+          "exampleAnswers": null
+        },
+        {
+          "id": "item-5",
+          "number": 5,
+          "input": "gaps",
+          "segments": [
+            "your ",
+            " is your whole name, including your first name, any middle names, and your family name"
+          ],
+          "answers": [
+            "full name"
+          ],
+          "example": false,
+          "exampleMode": null,
+          "exampleAnswers": null
+        },
+        {
+          "id": "item-6",
+          "number": 6,
+          "input": "gaps",
+          "segments": [
+            "your ",
+            " are the first letters of all your names"
+          ],
+          "answers": [
+            "initials"
+          ],
+          "example": false,
+          "exampleMode": null,
+          "exampleAnswers": null
+        }
+      ],
+      "hideAnswersOnError": true,
+      "wordBank": [
+        "first name",
+        "full name",
+        "initials",
+        "maiden name",
+        "married name",
+        "middle name"
+      ],
+      "inlineNumberedItems": true
+    },
+    {
+      "type": "section",
+      "id": "vocab-speaking",
+      "title": "VOCABULARY FROM SPEAKING",
+      "eyebrow": "1A"
+    },
+    {
+      "type": "exercise",
+      "id": "vocab-speaking",
+      "title": "Vocabulary from Speaking",
+      "instructions": "Complete the sentences with a word or phrase from the list.",
+      "items": [
+        {
+          "id": "item-1",
+          "number": 1,
+          "input": "gaps",
+          "segments": [
+            "Our art and design courses are suitable ",
+            " of all ages."
+          ],
+          "answers": [
+            "for creative people"
+          ],
+          "example": true,
+          "exampleMode": "gaps",
+          "exampleAnswers": [
+            "for creative people"
+          ]
+        },
+        {
+          "id": "item-2",
+          "number": 2,
+          "input": "gaps",
+          "segments": [
+            "The ",
+            " from the lamp creates a relaxing atmosphere in the room."
+          ],
+          "answers": [
+            "warm light"
+          ],
+          "example": false,
+          "exampleMode": null,
+          "exampleAnswers": null
+        },
+        {
+          "id": "item-3",
+          "number": 3,
+          "input": "gaps",
+          "segments": [
+            "The ",
+            " of some modern houses means they can be built in less than a day!"
+          ],
+          "answers": [
+            "simple building system"
+          ],
+          "example": false,
+          "exampleMode": null,
+          "exampleAnswers": null
+        },
+        {
+          "id": "item-4",
+          "number": 4,
+          "input": "gaps",
+          "segments": [
+            "The soup’s ",
+            " . Can I have some more?"
+          ],
+          "answers": [
+            "delicious"
+          ],
+          "example": false,
+          "exampleMode": null,
+          "exampleAnswers": null
+        },
+        {
+          "id": "item-5",
+          "number": 5,
+          "input": "gaps",
+          "segments": [
+            "Do you think that doing crosswords improves your ",
+            "?"
+          ],
+          "answers": [
+            "brainpower"
+          ],
+          "example": false,
+          "exampleMode": null,
+          "exampleAnswers": null
+        },
+        {
+          "id": "item-6",
+          "number": 6,
+          "input": "gaps",
+          "segments": [
+            "The phone is available in ",
+            "."
+          ],
+          "answers": [
+            "a wide range of modern colours"
+          ],
+          "example": false,
+          "exampleMode": null,
+          "exampleAnswers": null
+        },
+        {
+          "id": "item-7",
+          "number": 7,
+          "input": "gaps",
+          "segments": [
+            "",
+            " packaging is made of materials like glass or paper."
+          ],
+          "answers": [
+            "Recyclable"
+          ],
+          "example": false,
+          "exampleMode": null,
+          "exampleAnswers": null
+        },
+        {
+          "id": "item-8",
+          "number": 8,
+          "input": "gaps",
+          "segments": [
+            "Our products are ",
+            " – they don’t harm the environment."
+          ],
+          "answers": [
+            "good for the planet"
+          ],
+          "example": false,
+          "exampleMode": null,
+          "exampleAnswers": null
+        },
+        {
+          "id": "item-9",
+          "number": 9,
+          "input": "gaps",
+          "segments": [
+            "If you want a ",
+            " snack, have some fruit."
+          ],
+          "answers": [
+            "healthy"
+          ],
+          "example": false,
+          "exampleMode": null,
+          "exampleAnswers": null
+        },
+        {
+          "id": "item-10",
+          "number": 10,
+          "input": "gaps",
+          "segments": [
+            "The model plane is very simple to build because the parts ",
+            "."
+          ],
+          "answers": [
+            "click together easily"
+          ],
+          "example": false,
+          "exampleMode": null,
+          "exampleAnswers": null
+        }
+      ],
+      "hideAnswersOnError": true,
+      "wordBank": [
+        "a wide range of modern colours",
+        "brainpower",
+        "click together easily",
+        "delicious",
+        "for creative people",
+        "good for the planet",
+        "healthy",
+        "recyclable",
+        "simple building system",
+        "warm light"
+      ],
+      "inlineNumberedItems": true
+    },
+    {
+      "type": "section",
+      "id": "pronun-section",
+      "title": "2 PRONUNCIATION",
+      "eyebrow": "Vowel sounds"
+    },
+    {
+      "type": "exercise",
+      "id": "pron-2c",
+      "title": "2c · Listen and complete",
+      "instructions": "Listen and complete the sentences.",
+      "items": [],
+      "hideAnswersOnError": true,
+      "layout": "continuous-gaps",
+      "paragraphs": [
+        [
+          "1 ",
+          {
+            "type": "gap",
+            "id": "1a",
+            "answer": "Anna",
+            "example": true,
+            "width": "medium"
+          },
+          "’s carrying a ",
+          {
+            "type": "gap",
+            "id": "1b",
+            "answer": "black",
+            "example": true,
+            "width": "medium"
+          },
+          " ",
+          {
+            "type": "gap",
+            "id": "1c",
+            "answer": "bag",
+            "example": true,
+            "width": "medium"
+          },
+          "."
+        ],
+        [
+          "2 ",
+          {
+            "type": "gap",
+            "id": "2a",
+            "answer": "Amy",
+            "example": false,
+            "width": "medium"
+          },
+          "’s ",
+          {
+            "type": "gap",
+            "id": "2b",
+            "answer": "making",
+            "example": false,
+            "width": "medium"
+          },
+          " a ",
+          {
+            "type": "gap",
+            "id": "2c",
+            "answer": "cake",
+            "example": false,
+            "width": "medium"
+          },
+          " today."
+        ],
+        [
+          "3 ",
+          {
+            "type": "gap",
+            "id": "3a",
+            "answer": "Jessica",
+            "example": false,
+            "width": "medium"
+          },
+          "’s sending a ",
+          {
+            "type": "gap",
+            "id": "3b",
+            "answer": "message",
+            "example": false,
+            "width": "medium"
+          },
+          " to a ",
+          {
+            "type": "gap",
+            "id": "3c",
+            "answer": "friend",
+            "example": false,
+            "width": "medium"
+          },
+          "."
+        ],
+        [
+          "4 ",
+          {
+            "type": "gap",
+            "id": "4a",
+            "answer": "Peter",
+            "example": false,
+            "width": "medium"
+          },
+          "’s seeing his ",
+          {
+            "type": "gap",
+            "id": "4b",
+            "answer": "niece",
+            "example": false,
+            "width": "medium"
+          },
+          " this ",
+          {
+            "type": "gap",
+            "id": "4c",
+            "answer": "evening",
+            "example": false,
+            "width": "medium"
+          },
+          "."
+        ],
+        [
+          "5 ",
+          {
+            "type": "gap",
+            "id": "5a",
+            "answer": "Linda",
+            "example": false,
+            "width": "medium"
+          },
+          "’s ",
+          {
+            "type": "gap",
+            "id": "5b",
+            "answer": "visiting",
+            "example": false,
+            "width": "medium"
+          },
+          " ",
+          {
+            "type": "gap",
+            "id": "5c",
+            "answer": "India",
+            "example": false,
+            "width": "medium"
+          },
+          " this year."
+        ],
+        [
+          "6 ",
+          {
+            "type": "gap",
+            "id": "6a",
+            "answer": "Simon",
+            "example": false,
+            "width": "medium"
+          },
+          "’s ",
+          {
+            "type": "gap",
+            "id": "6b",
+            "answer": "wife",
+            "example": false,
+            "width": "medium"
+          },
+          " is quite ",
+          {
+            "type": "gap",
+            "id": "6c",
+            "answer": "nice",
+            "example": false,
+            "width": "medium"
+          },
+          "."
+        ],
+        [
+          "7 ",
+          {
+            "type": "gap",
+            "id": "7a",
+            "answer": "George",
+            "example": false,
+            "width": "medium"
+          },
+          " is ordering ",
+          {
+            "type": "gap",
+            "id": "7b",
+            "answer": "more",
+            "example": false,
+            "width": "medium"
+          },
+          " ",
+          {
+            "type": "gap",
+            "id": "7c",
+            "answer": "water",
+            "example": false,
+            "width": "medium"
+          },
+          "."
+        ],
+        [
+          "8 ",
+          {
+            "type": "gap",
+            "id": "8a",
+            "answer": "Tony",
+            "example": false,
+            "width": "medium"
+          },
+          "’s ",
+          {
+            "type": "gap",
+            "id": "8b",
+            "answer": "going",
+            "example": false,
+            "width": "medium"
+          },
+          " ",
+          {
+            "type": "gap",
+            "id": "8c",
+            "answer": "home",
+            "example": false,
+            "width": "medium"
+          },
+          " alone."
+        ]
+      ],
+      "audio": "audio/EnglishFile_4e_Intermediate_Plus_WB_1.2.mp3",
+      "image": "images/lesson-1-vowel-cues.svg",
+      "imageAlt": "Eight vowel sound picture cues: cat, train, egg, tree, fish, bike, horse, phone",
+      "stickyImage": true
+    },
+    {
+      "type": "section",
+      "id": "grammar-section",
+      "title": "3 GRAMMAR",
+      "eyebrow": "Pronouns"
+    },
+    {
+      "type": "exercise",
+      "id": "grammar-3a",
+      "title": "3a · Pronouns",
+      "instructions": "Complete the sentences with a pronoun (I, me, mine, etc.) or a possessive adjective (my).",
+      "items": [
+        {
+          "id": "item-1",
+          "number": 1,
+          "input": "gaps",
+          "segments": [
+            "My wife and I are having a baby girl. We’re going to call ",
+            " Eloise."
+          ],
+          "answers": [
+            "her"
+          ],
+          "example": true,
+          "exampleMode": "gaps",
+          "exampleAnswers": [
+            "her"
+          ]
+        },
+        {
+          "id": "item-2",
+          "number": 2,
+          "input": "gaps",
+          "segments": [
+            "I’d like you to meet my new boyfriend. ",
+            " name’s Tom."
+          ],
+          "answers": [
+            "His"
+          ],
+          "example": false,
+          "exampleMode": null,
+          "exampleAnswers": null
+        },
+        {
+          "id": "item-3",
+          "number": 3,
+          "input": "gaps",
+          "segments": [
+            "I’m staying at my sister’s house. I always stay with ",
+            " when I go to the UK."
+          ],
+          "answers": [
+            "her"
+          ],
+          "example": false,
+          "exampleMode": null,
+          "exampleAnswers": null
+        },
+        {
+          "id": "item-4",
+          "number": 4,
+          "input": "gaps",
+          "segments": [
+            "We aren’t going to Emma and Ian’s wedding. They haven’t invited ",
+            "."
+          ],
+          "answers": [
+            "us"
+          ],
+          "example": false,
+          "exampleMode": null,
+          "exampleAnswers": null
+        },
+        {
+          "id": "item-5",
+          "number": 5,
+          "input": "gaps",
+          "segments": [
+            "Can I borrow your dictionary, please? I’ve forgotten ",
+            "."
+          ],
+          "answers": [
+            "mine"
+          ],
+          "example": false,
+          "exampleMode": null,
+          "exampleAnswers": null
+        },
+        {
+          "id": "item-6",
+          "number": 6,
+          "input": "gaps",
+          "segments": [
+            "I have two nephews. ",
+            " names are Richard and Matthew."
+          ],
+          "answers": [
+            "Their"
+          ],
+          "example": false,
+          "exampleMode": null,
+          "exampleAnswers": null
+        },
+        {
+          "id": "item-7",
+          "number": 7,
+          "input": "gaps",
+          "segments": [
+            "We go everywhere by public transport. The bus stops right outside ",
+            " house."
+          ],
+          "answers": [
+            "our"
+          ],
+          "example": false,
+          "exampleMode": null,
+          "exampleAnswers": null
+        },
+        {
+          "id": "item-8",
+          "number": 8,
+          "input": "gaps",
+          "segments": [
+            "Do you know where my keys are? I can’t find ",
+            " anywhere."
+          ],
+          "answers": [
+            "them"
+          ],
+          "example": false,
+          "exampleMode": null,
+          "exampleAnswers": null
+        },
+        {
+          "id": "item-9",
+          "number": 9,
+          "input": "gaps",
+          "segments": [
+            "My car is nearly out of petrol. Let’s take ",
+            "."
+          ],
+          "answers": [
+            "yours"
+          ],
+          "example": false,
+          "exampleMode": null,
+          "exampleAnswers": null
+        },
+        {
+          "id": "item-10",
+          "number": 10,
+          "input": "gaps",
+          "segments": [
+            "It’s my dad’s birthday tomorrow. I mustn’t forget to call ",
+            "."
+          ],
+          "answers": [
+            "him"
+          ],
+          "example": false,
+          "exampleMode": null,
+          "exampleAnswers": null
+        }
+      ],
+      "hideAnswersOnError": true,
+      "inlineNumberedItems": true
+    },
+    {
+      "type": "exercise",
+      "id": "grammar-3b",
+      "title": "3b · Object pronouns",
+      "instructions": "Circle the correct answer.",
+      "items": [
+        {
+          "id": "item-1",
+          "number": 1,
+          "example": true,
+          "exampleMode": "choice",
+          "exampleAnswer": "it to them",
+          "prompt": "The children love that book. My husband reads to them it / it to them."
+        },
+        {
+          "id": "item-2",
+          "number": 2,
+          "input": "single",
+          "segments": [
+            "They gave ",
+            " ."
+          ],
+          "options": [
+            "us their tickets",
+            "their tickets us"
+          ],
+          "answer": 0,
+          "example": false,
+          "exampleMode": null
+        },
+        {
+          "id": "item-3",
+          "number": 3,
+          "input": "single",
+          "segments": [
+            "I’ll send ",
+            " when I arrive."
+          ],
+          "options": [
+            "a message you",
+            "you a message"
+          ],
+          "answer": 1,
+          "example": false,
+          "exampleMode": null
+        },
+        {
+          "id": "item-4",
+          "number": 4,
+          "input": "single",
+          "segments": [
+            "What do you think of my curtains? My mum made ",
+            " ."
+          ],
+          "options": [
+            "them for me",
+            "for me them"
+          ],
+          "answer": 0,
+          "example": false,
+          "exampleMode": null
+        },
+        {
+          "id": "item-5",
+          "number": 5,
+          "input": "single",
+          "segments": [
+            "She showed ",
+            " ."
+          ],
+          "options": [
+            "me her holiday photos",
+            "her holiday photos me"
+          ],
+          "answer": 0,
+          "example": false,
+          "exampleMode": null
+        },
+        {
+          "id": "item-6",
+          "number": 6,
+          "input": "single",
+          "segments": [
+            "I’m going to lend ",
+            " ."
+          ],
+          "options": [
+            "a suitcase her",
+            "her a suitcase"
+          ],
+          "answer": 1,
+          "example": false,
+          "exampleMode": null
+        },
+        {
+          "id": "item-7",
+          "number": 7,
+          "input": "single",
+          "segments": [
+            "Do you like my new phone? My cousin sold ",
+            " ."
+          ],
+          "options": [
+            "to me it",
+            "it to me"
+          ],
+          "answer": 1,
+          "example": false,
+          "exampleMode": null
+        },
+        {
+          "id": "item-8",
+          "number": 8,
+          "input": "single",
+          "segments": [
+            "Put on these gloves. I bought ",
+            " ."
+          ],
+          "options": [
+            "them for you",
+            "for you them"
+          ],
+          "answer": 0,
+          "example": false,
+          "exampleMode": null
+        }
+      ],
+      "hideAnswersOnError": true,
+      "inlineNumberedItems": true
+    },
+    {
+      "type": "exercise",
+      "id": "grammar-3c",
+      "title": "3c · Rewrite the answers",
+      "instructions": "Complete the answers in the conversations. Change the word order and use pronouns and to / for.",
+      "items": [
+        {
+          "id": "item-1",
+          "number": 1,
+          "example": true,
+          "prompt": "Jack showed it to me."
+        },
+        {
+          "id": "item-2",
+          "number": 2,
+          "input": "gaps",
+          "segments": [
+            "Her husband ",
+            "."
+          ],
+          "answers": [
+            "sent them to her"
+          ]
+        },
+        {
+          "id": "item-3",
+          "number": 3,
+          "input": "gaps",
+          "segments": [
+            "Her father ",
+            "."
+          ],
+          "answers": [
+            [
+              "is going to buy it for her",
+              "'s going to buy it for her",
+              "’s going to buy it for her"
+            ]
+          ]
+        },
+        {
+          "id": "item-4",
+          "number": 4,
+          "input": "gaps",
+          "segments": [
+            "Their neighbour ",
+            "."
+          ],
+          "answers": [
+            "sold it to them"
+          ]
+        },
+        {
+          "id": "item-5",
+          "number": 5,
+          "input": "gaps",
+          "segments": [
+            "My mum ",
+            "."
+          ],
+          "answers": [
+            "makes it for us"
+          ]
+        },
+        {
+          "id": "item-6",
+          "number": 6,
+          "input": "gaps",
+          "segments": [
+            "A colleague ",
+            "."
+          ],
+          "answers": [
+            "gave it to us"
+          ]
+        },
+        {
+          "id": "item-7",
+          "number": 7,
+          "input": "gaps",
+          "segments": [
+            "My brother ",
+            "."
+          ],
+          "answers": [
+            [
+              "is going to get them for us",
+              "'s going to get them for us",
+              "’s going to get them for us"
+            ]
+          ]
+        },
+        {
+          "id": "item-8",
+          "number": 8,
+          "input": "gaps",
+          "segments": [
+            "His grandmother ",
+            "."
+          ],
+          "answers": [
+            [
+              "is reading it to him",
+              "'s reading it to him",
+              "’s reading it to him"
+            ]
+          ]
+        }
+      ],
+      "hideAnswersOnError": true,
+      "layout": "dialogue",
+      "dialogueLines": [
+        {
+          "speaker": "A",
+          "text": "Who showed you the photo?"
+        },
+        {
+          "speaker": "B",
+          "text": "",
+          "itemIds": [
+            "item-1"
+          ]
+        },
+        {
+          "speaker": "A",
+          "text": "Who sent Sophie those flowers?"
+        },
+        {
+          "speaker": "B",
+          "text": "",
+          "itemIds": [
+            "item-2"
+          ]
+        },
+        {
+          "speaker": "A",
+          "text": "Who’s going to buy your girlfriend a car?"
+        },
+        {
+          "speaker": "B",
+          "text": "",
+          "itemIds": [
+            "item-3"
+          ]
+        },
+        {
+          "speaker": "A",
+          "text": "Who sold your parents their new car?"
+        },
+        {
+          "speaker": "B",
+          "text": "",
+          "itemIds": [
+            "item-4"
+          ]
+        },
+        {
+          "speaker": "A",
+          "text": "Who makes your lunch?"
+        },
+        {
+          "speaker": "B",
+          "text": "",
+          "itemIds": [
+            "item-5"
+          ]
+        },
+        {
+          "speaker": "A",
+          "text": "Who gave you and your husband that picture?"
+        },
+        {
+          "speaker": "B",
+          "text": "",
+          "itemIds": [
+            "item-6"
+          ]
+        },
+        {
+          "speaker": "A",
+          "text": "Who’s going to get you and your friends the tickets?"
+        },
+        {
+          "speaker": "B",
+          "text": "",
+          "itemIds": [
+            "item-7"
+          ]
+        },
+        {
+          "speaker": "A",
+          "text": "Who’s reading Max the story?"
+        },
+        {
+          "speaker": "B",
+          "text": "",
+          "itemIds": [
+            "item-8"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "exercise",
+      "id": "grammar-3d",
+      "title": "3d · A story about a name",
+      "instructions": "Complete the text with the correct pronouns or possessive adjectives.",
+      "items": [],
+      "hideAnswersOnError": true,
+      "layout": "continuous-gaps",
+      "paragraphs": [
+        [
+          {
+            "type": "gap",
+            "id": "1",
+            "answer": "My",
+            "example": true,
+            "width": "medium"
+          },
+          " brother’s first name is David – ",
+          {
+            "type": "gap",
+            "id": "2",
+            "answer": "he",
+            "example": false,
+            "width": "medium"
+          },
+          "’s called Dave for short. My parents gave ",
+          {
+            "type": "gap",
+            "id": "3",
+            "answer": "him",
+            "example": false,
+            "width": "medium"
+          },
+          " that name because they liked ",
+          {
+            "type": "gap",
+            "id": "4",
+            "answer": "it",
+            "example": false,
+            "width": "medium"
+          },
+          ". His middle name is Robert. Robert was my grandfather’s first name and my dad’s middle name, so my brother is named after ",
+          {
+            "type": "gap",
+            "id": "5",
+            "answer": "them",
+            "example": false,
+            "width": "medium"
+          },
+          ". Dave’s surname is the same as ",
+          {
+            "type": "gap",
+            "id": "6",
+            "answer": "mine",
+            "example": false,
+            "width": "medium"
+          },
+          ": Hudson. ",
+          {
+            "type": "gap",
+            "id": "7",
+            "answer": "His",
+            "example": false,
+            "width": "medium"
+          },
+          " nickname at school was Henry because ",
+          {
+            "type": "gap",
+            "id": "8",
+            "answer": "it",
+            "example": false,
+            "width": "medium"
+          },
+          "’s the first name of the famous explorer Henry Hudson."
+        ]
+      ],
+      "image": "images/lesson-1-david-original.png",
+      "imageAlt": "Original workbook portrait of David",
+      "stickyImage": true
+    }
+  ]
+}

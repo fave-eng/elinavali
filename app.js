@@ -1201,7 +1201,7 @@
     </div>`;
   }
 
-  function checkContinuousGapsBlock(block, node) {
+  function checkContinuousGapsBlock(block, node, options = {}) {
     const actual = {};
     let correctCount = 0;
     let total = 0;
@@ -1216,8 +1216,10 @@
       const correct = accepted.some((answer) => normalizeAnswer(answer) !== '' && normalizeAnswer(answer) === normalizeAnswer(value));
       total += 1;
       if (correct) correctCount += 1;
-      input.classList.toggle('is-correct', correct);
-      input.classList.toggle('is-wrong', !correct);
+      if (!options.silent) {
+        input.classList.toggle('is-correct', correct);
+        input.classList.toggle('is-wrong', !correct);
+      }
     });
     return { actual, correctCount, total };
   }
@@ -1984,7 +1986,7 @@
       correct = JSON.stringify(actual) === JSON.stringify(expected);
     } else if (inputType === 'single') {
       actual = itemNode.querySelector('input:checked')?.value ?? '';
-      correct = Number(actual) === Number(item.answer);
+      correct = actual !== '' && Number(actual) === Number(item.answer);
     } else if (inputType === 'select') {
       actual = itemNode.querySelector('select')?.value ?? '';
       correct = actual !== '' && Number(actual) === Number(item.answer);
@@ -2018,7 +2020,7 @@
 
   function checkExerciseBlock(block, node, options = {}) {
     if (block.layout === 'crossword-grid') return checkCrosswordGridBlock(block, node);
-    if (block.layout === 'continuous-gaps') return checkContinuousGapsBlock(block, node);
+    if (block.layout === 'continuous-gaps') return checkContinuousGapsBlock(block, node, options);
     if (block.layout === 'ed-pronunciation') return checkEdPronunciationBlock(block, node);
     if (block.layout === 'present-past-table') return checkPresentPastTableBlock(block, node);
     const actual = {};

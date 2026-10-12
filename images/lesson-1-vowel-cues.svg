@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="580" height="560" viewBox="0 0 580 560">
+<rect width="580" height="560" rx="25" fill="#f9fbff"/>
+<text x="28" y="40" font-family="Arial,sans-serif" font-weight="bold" font-size="19" fill="#243456">Vowel sounds · picture cues</text>
+<rect x="24" y="64" width="258" height="106" rx="16" fill="#fff" stroke="#d6e1f4" stroke-width="2"/>
+<text x="44" y="127" font-size="47">🐈</text>
+<text x="123" y="124" font-family="Arial,sans-serif" font-size="23" font-weight="bold" fill="#243456">1 · cat</text>
+<rect x="302" y="64" width="258" height="106" rx="16" fill="#fff" stroke="#d6e1f4" stroke-width="2"/>
+<text x="322" y="127" font-size="47">🚂</text>
+<text x="401" y="124" font-family="Arial,sans-serif" font-size="23" font-weight="bold" fill="#243456">2 · train</text>
+<rect x="24" y="182" width="258" height="106" rx="16" fill="#fff" stroke="#d6e1f4" stroke-width="2"/>
+<text x="44" y="245" font-size="47">🥚</text>
+<text x="123" y="242" font-family="Arial,sans-serif" font-size="23" font-weight="bold" fill="#243456">3 · egg</text>
+<rect x="302" y="182" width="258" height="106" rx="16" fill="#fff" stroke="#d6e1f4" stroke-width="2"/>
+<text x="322" y="245" font-size="47">🌳</text>
+<text x="401" y="242" font-family="Arial,sans-serif" font-size="23" font-weight="bold" fill="#243456">4 · tree</text>
+<rect x="24" y="300" width="258" height="106" rx="16" fill="#fff" stroke="#d6e1f4" stroke-width="2"/>
+<text x="44" y="363" font-size="47">🐟</text>
+<text x="123" y="360" font-family="Arial,sans-serif" font-size="23" font-weight="bold" fill="#243456">5 · fish</text>
+<rect x="302" y="300" width="258" height="106" rx="16" fill="#fff" stroke="#d6e1f4" stroke-width="2"/>
+<text x="322" y="363" font-size="47">🚲</text>
+<text x="401" y="360" font-family="Arial,sans-serif" font-size="23" font-weight="bold" fill="#243456">6 · bike</text>
+<rect x="24" y="418" width="258" height="106" rx="16" fill="#fff" stroke="#d6e1f4" stroke-width="2"/>
+<text x="44" y="481" font-size="47">🐎</text>
+<text x="123" y="478" font-family="Arial,sans-serif" font-size="23" font-weight="bold" fill="#243456">7 · horse</text>
+<rect x="302" y="418" width="258" height="106" rx="16" fill="#fff" stroke="#d6e1f4" stroke-width="2"/>
+<text x="322" y="481" font-size="47">☎️</text>
+<text x="401" y="478" font-family="Arial,sans-serif" font-size="23" font-weight="bold" fill="#243456">8 · phone</text>
+</svg>
