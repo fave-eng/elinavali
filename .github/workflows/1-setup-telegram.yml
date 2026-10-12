@@ -1,0 +1,52 @@
+name: 1 - Check Telegram notifications (no deployment)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify Elina recipient and bot access (read only)
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module - <<'NODE'
+          import fs from 'node:fs';
+          import vm from 'node:vm';
+          const sandbox = { window: {} };
+          vm.createContext(sandbox);
+          vm.runInContext(fs.readFileSync('config.js', 'utf8'), sandbox);
+          const cfg = sandbox.window.APP_CONFIG;
+          const studentId = cfg.student?.id;
+          const expectedTopic = Number(cfg.telegram?.expectedTopicId);
+          if (studentId !== 'elinavali' || expectedTopic !== 5 || cfg.features?.telegramNotifications !== true) {
+            throw new Error('Unexpected student ID, Telegram topic or disabled notifications');
+          }
+          const url = `${cfg.supabase.url.replace(/\/+$/, '')}/functions/v1/notify-telegram`;
+          const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json',
+              apikey: cfg.supabase.anonKey,
+              authorization: `Bearer ${cfg.supabase.anonKey}`,
+            },
+            body: JSON.stringify({ kind: 'diagnostics_health', studentId }),
+          });
+          const data = await response.json();
+          if (!response.ok || !data.ok) throw new Error(`Health check failed: ${JSON.stringify(data)}`);
+          if (data.diagnosticVersion !== 'multi-student-diagnostics-v2') throw new Error('Unexpected Edge Function diagnostics version');
+          if (data.recipient?.source !== 'database' || Number(data.recipient?.threadId) !== expectedTopic) {
+            throw new Error(`Wrong Telegram recipient or topic: ${JSON.stringify(data.recipient)}`);
+          }
+          if (!data.telegram?.bot?.ok || !data.telegram?.chat?.ok) throw new Error('Bot/group access failed');
+          console.log(`OK: ${studentId} has an active recipient in topic ${expectedTopic}; bot and chat are accessible.`);
+          console.log('This workflow does not send a Telegram message. Use diagnostics.html to test actual delivery.');
+          NODE

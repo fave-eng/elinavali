@@ -1,0 +1,70 @@
+name: 2 - Notify about new materials
+
+on:
+  workflow_dispatch:
+    inputs:
+      lesson_id:
+        description: 'Lesson ID to notify, for example lesson-2.'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    env:
+      NOTIFY_WEBHOOK_SECRET: ${{ secrets.NOTIFY_WEBHOOK_SECRET }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Read Elina settings
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          SETTINGS="$(node - <<'NODE'
+          global.window = {}
+          require('./config.js')
+
+          const config = window.APP_CONFIG || {}
+          const supabaseUrl = String(config.supabase?.url || '')
+          const projectRef = (supabaseUrl.match(/^https:\/\/([^.]+)\.supabase\.co/) || [])[1] || ''
+          const studentId = String(config.student?.id || '')
+
+          const repo = String(process.env.GITHUB_REPOSITORY || '')
+          const [owner, name] = repo.split('/')
+          const siteBaseUrl = owner && name
+            ? `https://${owner}.github.io/${name}/`
+            : ''
+
+          console.log(`SUPABASE_PROJECT_ID=${projectRef}`)
+          console.log(`STUDENT_ID=${studentId}`)
+          console.log(`TELEGRAM_NOTIFICATIONS_ENABLED=${config.features?.telegramNotifications === true}`)
+          console.log(`SITE_BASE_URL=${siteBaseUrl}`)
+          NODE
+          )"
+
+          echo "$SETTINGS" >> "$GITHUB_ENV"
+
+      - name: Check settings
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          test -n "$NOTIFY_WEBHOOK_SECRET" || (echo "Missing secret: NOTIFY_WEBHOOK_SECRET" && exit 1)
+          test -n "$SUPABASE_PROJECT_ID" || (echo "Could not read Supabase project ID from config.js" && exit 1)
+          test "$STUDENT_ID" = "elinavali" || (echo "config.js student.id must be elinavali" && exit 1)
+          test "$TELEGRAM_NOTIFICATIONS_ENABLED" = "true" || (echo "Telegram notifications are currently disabled" && exit 1)
+          test -n "$SITE_BASE_URL" || (echo "Could not determine GitHub Pages URL" && exit 1)
+
+      - name: Notify one lesson manually
+        env:
+          LESSON_ID: ${{ inputs.lesson_id }}
+        run: node scripts/prepare-notification.mjs
