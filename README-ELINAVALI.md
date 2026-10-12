@@ -36,12 +36,20 @@ No Viktoria homework, grammar, vocabulary, or Telegram recipient information has
 - Current configuration points to the existing shared Supabase project and uses `student_id='elinavali'` in progress records. **This namespacing alone is not access control.** Test read and write on the published site with `diagnostics.html`. Review RLS/auth for student data before giving public access.
 - A successful local static-file test is not proof that remote Supabase works: the backend is not accessed by this ZIP build.
 
-## Telegram (OFF by default)
-- The source project pointed to a Telegram topic for another learner. That recipient was **not** reused.
-- Telegram reports and new-material notifications are disabled in `config.js`: `telegramNotifications: false`; `expectedTopicId: null`.
-- To enable: obtain Elina's intended `chat_id` and `message_thread_id` (thread ID), register `student_id='elinavali'` in the existing multi-student table `telegram_recipients` using `supabase/telegram-recipient-setup.sql.example` as a guide, then configure `expectedTopicId` and set `telegramNotifications: true`.
-- Ensure the shared Edge Function is compatible and credentials are set before using `.github/workflows/1-setup-telegram.yml`. Do not redeploy the shared function casually: it serves other students too.
-- Once enabled, test the new ID in diagnostics before publishing or sending notifications.
+## Telegram: configured for Elina (2026-10-12)
+- Telegram topic link: https://t.me/c/4295118907/5
+- Only `student_id='elinavali'` was added to the existing shared `public.telegram_recipients` table:
+  `chat_id=-1004295118907`, `message_thread_id=5`, `enabled=true`.
+- The Supabase database reported a successful upsert. The records of `elina` (another student), `viktoria`, and all other students were not changed.
+- `config.js`: `telegram.expectedTopicId=5` and `features.telegramNotifications=true`.
+- The existing deployed `notify-telegram` function in the shared project was inspected and already supports `telegram_recipients` and `multi-student-diagnostics-v2`. **It was not redeployed or modified**.
+- Real delivery to the topic **has not yet been tested**, so confirm that the bot can post to that topic before treating notifications as operational.
+- On the published site, open `diagnostics.html`, click **Проверить всё**, then **Отправить тестовый отчёт в Telegram**. Confirm that Telegram accepted the message and that it appeared in the target topic. The test does not change Elina's real homework.
+- The SQL for future re-application is at `supabase/telegram-recipient-setup.sql`. It has already been executed; **do not run it again unless changing/restoring the recipient**.
+- `.github/workflows/1-setup-telegram.yml` has been made a **read-only verification** workflow. It no longer deploys the shared Edge Function or changes secrets. Use it only after pushing the site to a GitHub repository if you need an additional remote verification.
+- Homework-submission reports are sent by the site itself via the shared Edge Function after cloud submission, conditional on that function and the bot being reachable.
+- For manual **new-homework announcements**, `.github/workflows/2-notify-new-materials.yml` still requires GitHub Actions secret `NOTIFY_WEBHOOK_SECRET` in **this new repo** matching the existing Supabase Edge Function secret. Do not place the secret in `config.js`, a ZIP archive, or a commit. A lesson must be `status: available` and have `notification.enabled: true`.
+
 
 ## Important
 Only static files were prepared and locally validated. Publication, account provisioning, Supabase access, and Telegram delivery were not performed.
